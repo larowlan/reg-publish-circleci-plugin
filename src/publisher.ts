@@ -18,6 +18,7 @@ import mkdirp from "mkdirp"
 export interface PluginConfig {
   artifactPath: string
   pattern?: string
+  buildUrl: string
 }
 
 export class CirclePublisher
@@ -90,14 +91,13 @@ export class CirclePublisher
   }
 
   publish(key: string): Promise<PublishResult> {
-    return this.publishInternal(key).then(({ indexFile }) => {
-      const reportUrl = indexFile && process.env.CIRCLE_BUILD_URL
-      return { reportUrl }
+    return this.publishInternal(key).then(() => {
+      return { reportUrl: this.pluginConfig.buildUrl }
     })
   }
 
   protected uploadItem(key: string, item: FileItem): Promise<FileItem> {
-    this.logger.info(`Uploading item for [${key}]: ${item.path}`)
+    this.logger.info(`Copying item for [${key}]: ${item.path}`)
     return new Promise((resolve, reject) => {
       mkdirp(`${key}/${path.dirname(item.path)}`).then(
         () => {

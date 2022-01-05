@@ -24,7 +24,7 @@ export class CirclePreparer
   ): Promise<PluginConfig> {
     return new Promise((resolve, reject) => {
       mkdirp(option.options.artifactPath).then(
-        () => resolve({ artifactPath: option.options.artifactPath }),
+        () => resolve({ artifactPath: option.options.artifactPath, buildUrl: "$CIRCLE_BUILD_URL" }),
         (e) => reject(e)
       )
     })

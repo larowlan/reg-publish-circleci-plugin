@@ -7,7 +7,7 @@
     "target": "es2015",
     "module": "commonjs",
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "ES2018.Promise"],
     "moduleResolution": "node",
     "sourceMap": true,
     "stripInternal": true,
