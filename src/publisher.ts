@@ -11,8 +11,9 @@ import {
   AbstractPublisher,
   ObjectMetadata,
 } from "reg-suit-util"
-import { copyFile, readdir } from "fs/promises"
+import { copyFile, readdir } from "fs"
 import { existsSync } from "fs"
+import { promisify } from "util"
 import path from "path"
 import mkdirp from "mkdirp"
 
@@ -20,6 +21,18 @@ export interface PluginConfig {
   artifactPath: string
   pattern?: string
   buildUrl: string
+}
+
+const copyFilePromise = promisify(copyFile)
+const readdirPromise = (dir) => {
+  return new Promise((resolve, reject) => {
+    readdir(dir, (err, files) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(files)
+    })
+  })
 }
 
 export class CirclePublisher
@@ -79,7 +92,7 @@ export class CirclePublisher
           contents: [],
         })
       }
-      readdir(prefix).then(
+      readdirPromise(prefix).then(
         (files) => {
           const entries = []
           for (const file of files) {
@@ -109,7 +122,7 @@ export class CirclePublisher
       mkdirp(`${key}/${path.dirname(item.path)}`).then(
         () => {
           const destination = `${key}/${item.path}`
-          copyFile(item.absPath, destination).then(
+          copyFilePromise(item.absPath, destination).then(
             () => resolve(item),
             (err) => reject(err)
           )
