@@ -1,3 +1,4 @@
+src/index.js
 node_modules
 .idea
 jest.config.js.map

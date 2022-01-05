@@ -1,12 +1,14 @@
-import {PluginCreateOptions, PluginPreparer} from "reg-suit-interface";
-import {PluginConfig} from "./publisher";
-import mkdirp from "mkdirp";
+import { PluginCreateOptions, PluginPreparer } from "reg-suit-interface"
+import { PluginConfig } from "./publisher"
+import mkdirp from "mkdirp"
 
 export interface SetupInquireResult {
-  artifactPath: string;
+  artifactPath: string
 }
 
-export class CirclePreparer implements PluginPreparer<SetupInquireResult, PluginConfig> {
+export class CirclePreparer
+  implements PluginPreparer<SetupInquireResult, PluginConfig>
+{
   inquire() {
     return [
       {
@@ -14,12 +16,17 @@ export class CirclePreparer implements PluginPreparer<SetupInquireResult, Plugin
         type: "input",
         message: "Enter the artifact path relative to the working directory",
       },
-    ];
+    ]
   }
 
-  prepare(option: PluginCreateOptions<SetupInquireResult>): Promise<PluginConfig> {
+  prepare(
+    option: PluginCreateOptions<SetupInquireResult>
+  ): Promise<PluginConfig> {
     return new Promise((resolve, reject) => {
-      mkdirp(option.options.artifactPath).then(() => resolve({artifactPath: option.options.artifactPath}), (e) => reject(e))
+      mkdirp(option.options.artifactPath).then(
+        () => resolve({ artifactPath: option.options.artifactPath }),
+        (e) => reject(e)
+      )
     })
   }
 }

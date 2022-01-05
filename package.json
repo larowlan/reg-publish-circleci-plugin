@@ -13,8 +13,8 @@
   "scripts": {
     "test": "jest",
     "prepublish": "tsc -p tsconfig.build.json",
-    "format": "prettier --write \"{test,src}/**/*.js\"",
-    "lint": "prettier --check \"{test,src}/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "prettier --check \"src/**/*.ts\"",
     "semantic-release": "semantic-release"
   },
   "keywords": [
