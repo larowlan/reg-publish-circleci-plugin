@@ -58,7 +58,7 @@ jobs:
           useLockFile: false
 
       - name: 🏗 Run build script
-        run: npm run build
+        run: npm run prepublish
 
       - name: 🚀 Release
         uses: cycjimmy/semantic-release-action@v2
