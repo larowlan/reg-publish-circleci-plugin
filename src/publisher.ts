@@ -12,6 +12,7 @@ import {
   ObjectMetadata,
 } from "reg-suit-util"
 import { copyFile, readdir } from "fs/promises"
+import { existsSync } from "fs"
 import path from "path"
 import mkdirp from "mkdirp"
 
@@ -72,6 +73,12 @@ export class CirclePublisher
   ): Promise<ObjectListResult> {
     this.logger.info(`Getting prefix: ${prefix}`)
     return new Promise((resolve, reject) => {
+      if (!existsSync(prefix)) {
+        resolve({
+          isTruncated: false,
+          contents: [],
+        })
+      }
       readdir(prefix).then(
         (files) => {
           const entries = []

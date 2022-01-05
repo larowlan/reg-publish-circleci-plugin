@@ -35,6 +35,29 @@ describe("Publisher", () => {
     expect(result[0].absPath).toEqual(`${fixtures}/expected/reg-suit.jpg`)
   })
 
+  it("Should work if the snapshot is missing", async () => {
+    expect.assertions(1)
+    const publisher = new CirclePublisher()
+    const fixtures = fs.realpathSync(`${__dirname}/../../fixtures/.reg`)
+    publisher.init({
+      coreConfig: { actualDir: "", workingDir: "" },
+      logger: createLogger(),
+      noEmit: false,
+      options: {
+        artifactPath: "fixtures/artifacts",
+        buildUrl: "http://example.com",
+      },
+      workingDirs: {
+        base: fixtures,
+        actualDir: `${fixtures}/actual`,
+        expectedDir: `${fixtures}/expected`,
+        diffDir: "",
+      },
+    })
+    const result = await publisher.fetch("9c9bef0d-425e-42ec-82d2-20e76c8a6a07")
+    expect(result).toHaveLength(0)
+  })
+
   it("Should publish to local disk", async () => {
     expect.assertions(2)
     const publisher = new CirclePublisher()
