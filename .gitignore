@@ -1,0 +1,8 @@
+node_modules
+.idea
+jest.config.js.map
+jest.config.js
+jest.config.d.ts
+*.tsbuildinfo
+dist
+package-lock.json

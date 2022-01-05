@@ -1,0 +1,46 @@
+{
+  "name": "reg-publish-circleci-plugin",
+  "version": "1.0.0",
+  "description": "A Publish plugin for reg-suit that uses CircleCI artifacts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/larowlan/reg-publish-circleci-plugin.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "prepublish": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"{test,src}/**/*.js\"",
+    "lint": "prettier --check \"{test,src}/**/*.js\"",
+    "semantic-release": "semantic-release"
+  },
+  "keywords": [
+    "testing",
+    "ui",
+    "reg-suit",
+    "visual-regression",
+    "circleci"
+  ],
+  "author": "Lee Rowlands (https://github.com/larowlan)",
+  "bugs": {
+    "url": "https://github.com/larowlan/reg-publish-circleci-plugin/issues"
+  },
+  "homepage": "https://github.com/larowlan/reg-publish-circleci-plugin#readme",
+  "license": "MIT",
+  "dependencies": {
+    "mkdirp": "^1.0.4",
+    "reg-suit-util": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.6",
+    "reg-suit-interface": "^0.11.0",
+    "ts-node": "^10.4.0",
+    "typescript": "4.5.2",
+    "semantic-release": "^17.4.4",
+    "prettier": "^2.3.2"
+  }
+}
