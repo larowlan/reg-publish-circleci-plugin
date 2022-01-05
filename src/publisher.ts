@@ -24,8 +24,8 @@ export interface PluginConfig {
 }
 
 const copyFilePromise = promisify(copyFile)
-const readdirPromise = (dir) => {
-  return new Promise((resolve, reject) => {
+const readdirPromise = (dir: string) => {
+  return new Promise<string[]>((resolve, reject) => {
     readdir(dir, (err, files) => {
       if (err) {
         reject(err)
